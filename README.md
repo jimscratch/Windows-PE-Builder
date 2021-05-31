@@ -1,6 +1,12 @@
 # Windows Preboot Environment (WinPE) Builder
 
-This repo contains an powershell scripts to ....
+![GitHub repo size](https://img.shields.io/github/repo-size/niklasrast/Windows-PE-Builder)
+
+![GitHub issues](https://img.shields.io/github/issues-raw/niklasrast/Windows-PE-Builder)
+
+![GitHub last commit](https://img.shields.io/github/last-commit/niklasrast/Windows-PE-Builder)
+
+This repo contains an powershell scripts to create an customized winpe
 
 ## Create WinPE System:
 ```cmd
@@ -42,6 +48,16 @@ dism /unmount-wim /mountdir:"C:\Temp\WinPE\MOUNT" /commit
 ## Create WinPE System:
 ```cmd
 MakeWinPEMedia /ISO /f C:\Temp\WinPE C:\Temp\WinPE\CustomisedWinPE.iso
+```
+
+## Extract version from windows wim
+```cmd
+REM Get versions from wim
+dism /Get-WimInfo /WimFile:C:\Temp\sources\install.wim
+
+REM Export version to clean wim file
+dism /export-image /SourceImageFile:C:\Temp\sources\install.wim /SourceIndex:IndexNumber /DestinationImageFile:C:\Temp\install.wim /Compress:max /CheckIntegrity
+
 ```
 
 You can now use CustomisedWinPE.iso for deployment on WDS, USB-Stick or something else.
